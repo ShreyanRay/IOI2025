@@ -1,31 +1,10 @@
+#include "souvenirs.h"
 #include <bits/stdc++.h>
 using namespace std;
+
 #define int long long
-#define INF (int)1e18
 
-mt19937_64 RNG(chrono::steady_clock::now().time_since_epoch().count());
-
-int n;
-const int N = 105;
-int hidden_p[N];
-int counter[N];
-
-pair <vector <int>, int> transaction(int m){
-    assert(m >= hidden_p[n - 1] && m < hidden_p[0]);
-    
-    vector <int> bought;
-    for (int i = 0; i < n; i++){
-        if (m >= hidden_p[i]){
-            m -= hidden_p[i];
-            bought.push_back(i);
-            counter[i]++;
-        }
-    }
-    
-    return make_pair(bought, m);
-}
-
-void buy_souvenirs(int n, int p0){
+void buy_souvenirs(int32_t n, int p0){
     vector<set<int>> depend(n);
     vector<int> sum(n);
     vector<int> ans(n, -1);
@@ -106,41 +85,4 @@ void buy_souvenirs(int n, int p0){
             transaction(ans[i]);
         }
     }
-}
-
-void Solve() 
-{
-    cin >> n;
-    
-    for (int i = 0; i < n; i++){
-        cin >> hidden_p[i];
-        counter[i] = 0;
-    }
-    
-    buy_souvenirs(n, hidden_p[0]);
-    
-    for (int i = 0; i < n; i++){
-        assert(counter[i] == i);
-    }
-}
-
-int32_t main() 
-{
-    auto begin = std::chrono::high_resolution_clock::now();
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int t = 1;
-    // freopen("in",  "r", stdin);
-    // freopen("out", "w", stdout);
-    
-    // cin >> t;
-    for(int i = 1; i <= t; i++) 
-    {
-        //cout << "Case #" << i << ": ";
-        Solve();
-    }
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-    cerr << "Time measured: " << elapsed.count() * 1e-9 << " seconds.\n"; 
-    return 0;
 }
