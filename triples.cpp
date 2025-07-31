@@ -48,7 +48,7 @@ int smart(int n, vector <int> a){
         b[a[i] - i + n].push_back(i);
     }
     
-    int cutoff = 0;
+    int cutoff = sqrt(n);
     
     for (int x = 1; x <= 2 * n; x++){
         if (b[x].size() <= cutoff){
