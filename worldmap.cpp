@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
 #define INF (int)1e18
 
 mt19937_64 RNG(chrono::steady_clock::now().time_since_epoch().count());
 
-vector<vector<int>> create_map(int n, int m, vector <int> a, vector <int> b){
+vector<vector<int32_t>> create_map(int32_t n, int32_t m, vector <int32_t> a, vector <int32_t> b){
     vector <int> c(4 * n - 1);
     vector <int> dfs_ord;
     vector<vector<int>> adj(n + 1);
@@ -172,45 +171,4 @@ void validate(vector<vector<int>> c, int n, int m, vector <int> a, vector <int> 
     for (int i = 0; i < m; i++){
         assert(done[a[i]][b[i]] >= 1);
     }
-}
-
-void Solve() 
-{
-    int n, m; cin >> n >> m;
-    
-    vector <int> a(m), b(m);
-    for (int i = 0; i < m; i++){
-        cin >> a[i] >> b[i];
-    }
-    
-    auto c = create_map(n, m, a, b);
-    validate(c, n, m, a, b);
-    
-    for (int i = 0; i < c.size(); i++){
-        for (int j = 0; j < c.size(); j++){
-            cout << c[i][j] << " ";
-        }
-        cout << "\n";
-    }
-}
-
-int32_t main() 
-{
-    auto begin = std::chrono::high_resolution_clock::now();
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int t = 1;
-    // freopen("in",  "r", stdin);
-    // freopen("out", "w", stdout);
-    
- //   cin >> t;
-    for(int i = 1; i <= t; i++) 
-    {
-        //cout << "Case #" << i << ": ";
-        Solve();
-    }
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-    cerr << "Time measured: " << elapsed.count() * 1e-9 << " seconds.\n"; 
-    return 0;
 }
